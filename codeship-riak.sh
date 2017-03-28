@@ -13,7 +13,7 @@ set -e
 CACHED_DOWNLOAD="${HOME}/cache/riak-${RIAK_VERSION}.tar.gz"
 
 mkdir -p "${RIAK_DIR}"
-wget --continue --output-document "${CACHED_DOWNLOAD}" "http://s3.amazonaws.com/downloads.basho.com/riak/${RIAK_MAJOR_VERSION}.0/${RIAK_VERSION}/riak-${RIAK_VERSION}.tar.gz"
+wget --continue --output-document "${CACHED_DOWNLOAD}" "http://s3.amazonaws.com/downloads.basho.com/riak/${RIAK_MAJOR_VERSION}/${RIAK_VERSION}/riak-${RIAK_VERSION}.tar.gz"
 tar zxvf "${CACHED_DOWNLOAD}" --strip-components=1 --directory "${RIAK_DIR}"
 cd ${RIAK_DIR}
 make rel
