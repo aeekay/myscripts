@@ -1,0 +1,8 @@
+# Run the elixir test in the CogOtp directory
+curl https://s3-us-west-2.amazonaws.com/cogility-devops-scripts/CodeDeploy/OTP/appspec.yml -o appspec.yml
+mkdir deploy
+curl https://s3-us-west-2.amazonaws.com/cogility-devops-scripts/CodeDeploy/OTP/deploy/before-install.sh -o deploy/before-install.sh
+curl https://s3-us-west-2.amazonaws.com/cogility-devops-scripts/CodeDeploy/OTP/deploy/install.sh -o deploy/install.sh
+curl https://s3-us-west-2.amazonaws.com/cogility-devops-scripts/CodeDeploy/OTP/deploy/after-install.sh -o deploy/after-install.sh
+echo "Y" | mix deps.compile
+mix test_all

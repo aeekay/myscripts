@@ -1,0 +1,37 @@
+# Install git onto this VM
+source /dev/stdin <<< "$(curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/git.sh)"
+# Import Elixir and Erlang into the current session
+# source /dev/stdin <<< "$(curl -sSL https://raw.githubusercontent.com/aeekay/myscripts/master/codeship-erlang.sh)"
+# source /dev/stdin <<< "$(curl -sSL https://raw.githubusercontent.com/aeekay/myscripts/master/codeship-elixir.sh)"
+# Install asdf
+# git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.2.1
+# . $HOME/.asdf/asdf.sh
+# . $HOME/.asdf/completions/asdf.bash
+# asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang
+#asdf install erlang 17.5
+# asdf install erlang 19.3
+# asdf global erlang 19.3
+asdf install riak 2.1.3
+asdf global riak 2.1.3
+riak start
+# riak-admin bucket-type create maps '{"props":{"datatype":"map"}}'
+# riak-admin bucket-type create sets '{"props":{"datatype":"set"}}'
+# riak-admin bucket-type create counters '{"props":{"datatype":"counter"}}'
+# riak-admin bucket-type create hlls '{"props":{"datatype":"hll"}}'
+# riak-admin bucket-type status maps
+# riak-admin bucket-type status sets
+# riak-admin bucket-type status counters
+# riak-admin bucket-type status hlls
+# riak-admin bucket-type activate maps
+# riak-admin bucket-type activate sets
+# riak-admin bucket-type activate counters
+# riak-admin bucket-type activate hlls
+# Install all of the dependencies
+mix local.hex --force
+mix local.rebar --force
+yes | mix deps.get
+# Add the package.json file to the root of the project directory
+echo -e '{ "repository": {}, "license": "MIT", "scripts": { "install": "cd ./apps/cog_proxy && npm install babel-preset-es2015 && npm install babel-preset-es2016 && mix deps.get && npm install && cd ../../ && npm --prefix ./apps/cog_proxy install ./apps/cog_proxy && npm --prefix ./apps/data_funnel install ./apps/data_funnel && npm --prefix ./apps/data_generator install ./apps/data_generator && npm --prefix ./apps/data_ingest install ./apps/data_ingest && npm --prefix ./apps/data_ingest_client install ./apps/data_ingest_client && npm --prefix ./apps/db install ./apps/db && npm --prefix ./apps/demo_api install ./apps/demo_api && npm --prefix ./apps/demo_client install ./apps/demo_client && npm --prefix ./apps/indexer install ./apps/indexer && npm --prefix ./apps/lexicons install ./apps/lexicons && npm --prefix ./apps/lexicon_api install ./apps/lexicon_api" } }' > package.json
+# Install Node modules
+nvm use node
+npm install

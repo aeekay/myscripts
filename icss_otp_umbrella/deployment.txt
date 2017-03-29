@@ -1,0 +1,18 @@
+# Run a deployment script
+pip install awscli
+aws lambda invoke --function-name startEC2Instances --payload '{ "name": "elixirStack001", "dbserver" : [], "appserver": [ "i-09a090efc19211b69", "i-06cbd582f71c9dd1f" ], "webserver": [], "region": "us-west-2" }' lambda_output.txt 2>&1 >/dev/null || echo "Error"
+
+
+AWS CodeDeploy Deployment
+
+AWS Access Key ID: ****************72WQ
+AWS Secret Access Key: ************************************aRMd
+Region: us-west-2
+Application Name: ICSS_OTP
+Deployment Group Name: icss_otp_codeship_group
+S3 Bucket: cogility-projects
+
+
+# Stop the environment script
+pip install awscli
+aws lambda invoke --function-name stopEC2Instances --payload '{ "name": "elixirStack001", "dbserver": [], "appserver": [ "i-09a090efc19211b69", "i-06cbd582f71c9dd1f" ], "webserver" : [], "region": "us-west-2" }' lambda_output.txt 2>&1 >/dev/null || echo "Error"
